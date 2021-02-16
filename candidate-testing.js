@@ -61,19 +61,14 @@ Your Answer: ${candidateAnswers[4]}
 Correct Answer: ${correctAnswers[4]}
 `);
 
-function countCorrect(candAns, correctAns){ 
-  //let grade = 0;
-  let numCorrect = 0;
- for (i=0; i<candAns.length; i++){
+let numCorrect = 0;
+ for (i=0; i < questions.length; i++){
    numCorrect += Number(
-     candAns[i].toUpperCase() ===
-     correctAns[i].toUpperCase()
+     candidateAnswers[i].toUpperCase() ===
+     correctAnswers[i].toUpperCase()
      );
   } 
- //grade = numCorrect / candAns.length * 100;
-  return numCorrect;
-}
-let numCorrect = countCorrect(candidateAnswers, correctAnswers);
+ 
 let grade =  numCorrect / questions.length * 100;
 let result = "";
 if (grade >= 80){
