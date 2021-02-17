@@ -5,11 +5,13 @@ const input = require('readline-sync');
 // TODO 1.1a: Define candidateName // 
 let candidateName = "";
 // TODO 1.2a: Define question, correctAnswer, and candidateAnswer //
+
+
 let question = "Who was the first American woman in space? ";
 let correctAnswer = "Sally Ride";
 let candidateAnswer = "";
-let candidateAnswers = ['','','','',''];
 
+let candidateAnswers = ['','','','',''];
 let questions = ["Who was the first American woman in space? ", 
 "True or false: 5000 meters = 5 kilometers. ",
 "(5 + 3)/2 * 10 = ? ",
@@ -17,6 +19,7 @@ let questions = ["Who was the first American woman in space? ",
 "What is the minimum crew size for the ISS? "];
 let correctAnswers = ["Sally Ride", "True", "40","Trajectory", "3"]
 //console.log(questions,"\n", correctAnswers);
+
 
 
 function askForName() {
@@ -31,17 +34,30 @@ function askQuestion() {
     for (i=0; i < questions.length; i++){
     candidateAnswers[i] = input.question(questions[i]); 
     }
+    console.log("\n"); //New line for clarity.
   }
   
 function gradeQuiz(candidateAnswers) {
 
-  // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
-/*
-if (candidateAnswer === correctAnswer){
-  console.log("That is correct!")
-} else{
-  console.log("Incorrect answer.")
-}*/
+  // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly //
+
+  // Add function for DRY.
+  // This function returns a template literal.
+  function questionAndAns(questionNum){
+    let newLine = "\n";
+    if (questionNum === questions.length){
+      newLine = "";
+    }
+    return `${questionNum}) ${questions[questionNum - 1]}
+Your Answer: ${candidateAnswers[questionNum - 1]}
+Correct Answer: ${correctAnswers[questionNum -1]}\n${newLine}`
+  } // End of function //
+
+// Print the overall template literal.
+console.log(`Candidate Name: ${candidateName}
+${questionAndAns(1)}${questionAndAns(2)}${questionAndAns(3)}${questionAndAns(4)}${questionAndAns(5)}`);
+
+/*  Below was before DRY.
 console.log(`
 Candidate Name: ${candidateName}
 1) ${questions[0]}
@@ -60,7 +76,9 @@ Correct Answer: ${correctAnswers[3]}\n
 Your Answer: ${candidateAnswers[4]}
 Correct Answer: ${correctAnswers[4]}
 `);
+*/
 
+//Calculate the number of correct answers and grade.
 let numCorrect = 0;
  for (i=0; i < questions.length; i++){
    numCorrect += Number(
@@ -76,9 +94,8 @@ if (grade >= 80){
 } else{
   result = "FAILED";
 }
-
-console.log(
-`>>> Overall Grade: ${grade}% (${numCorrect} of 5 responses correct) <<<
+// Print overall grade and status with a template literal.
+console.log(`>>> Overall Grade: ${grade}% (${numCorrect} of ${questions.length} responses correct) <<<
 >>> Status: ${result} <<<`
     )
 }
