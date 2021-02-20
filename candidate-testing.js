@@ -57,6 +57,7 @@ Correct Answer: ${correctAnswers[questionNum -1]}\n${newLine}`
 console.log(`Candidate Name: ${candidateName}
 ${questionAndAns(1)}${questionAndAns(2)}${questionAndAns(3)}${questionAndAns(4)}${questionAndAns(5)}`);
 
+
 /*  Below was before DRY.
 console.log(`
 Candidate Name: ${candidateName}
@@ -98,8 +99,8 @@ if (grade >= 80){
 console.log(`>>> Overall Grade: ${grade}% (${numCorrect} of ${questions.length} responses correct) <<<
 >>> Status: ${result} <<<`
     )
-}
 
+}
 
 
 function runProgram() {
